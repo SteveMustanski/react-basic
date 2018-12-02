@@ -45,12 +45,19 @@ const Player = (props) => {
   );
 }
 
+// the class syntax needs to be used if state is needed
 class Counter extends React.Component {
 
   // class property syntax for creating state
   // this could also be done with a class constructor
   state = {
     score: 0
+  };
+
+  incrementScore() {
+    this.setState({
+      score: this.state.score + 1
+    });
   }
 
   render() {
@@ -58,7 +65,7 @@ class Counter extends React.Component {
       <div className='counter'>
         <button className='counter-action decrement'> - </button>
         <span className='counter-score'>{this.state.score}</span>
-        <button className='counter-action increment'> + </button>
+        <button className='counter-action increment' onClick={this.incrementScore.bind(this)}> + </button>
       </div>
     );
   }
