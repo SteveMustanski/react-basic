@@ -40,17 +40,24 @@ const Player = (props) => {
         {props.name}
       </span>
 
-      <Counter score={props.score}/>
+      <Counter />
     </div>
   );
 }
 
 class Counter extends React.Component {
+
+  // class property syntax for creating state
+  // this could also be done with a class constructor
+  state = {
+    score: 0
+  }
+
   render() {
     return (
       <div className='counter'>
         <button className='counter-action decrement'> - </button>
-        <span className='counter-score'>{this.props.score}</span>
+        <span className='counter-score'>{this.state.score}</span>
         <button className='counter-action increment'> + </button>
       </div>
     );
@@ -59,23 +66,22 @@ class Counter extends React.Component {
 
 const App = (props) => {
   return (
-  <div className="scoreboard">
-    <Header title="Scoreboard"
-     totalPlayers={props.initialPlayers.length}/>
+    <div className="scoreboard">
+      <Header title="Scoreboard"
+        totalPlayers={props.initialPlayers.length} />
 
-    {/* iterate over list of players */}
-    {props.initialPlayers.map( player => 
-    <Player 
-    name={player.name}
-    score={player.score}
-    key={player.id.toString()}
-    />
-    )}
-  </div>
+      {/* iterate over list of players */}
+      {props.initialPlayers.map(player =>
+        <Player
+          name={player.name}
+          key={player.id.toString()}
+        />
+      )}
+    </div>
   )
 }
 
 ReactDOM.render(
-  <App initialPlayers={players}/>,
+  <App initialPlayers={players} />,
   document.getElementById('root')
 );
